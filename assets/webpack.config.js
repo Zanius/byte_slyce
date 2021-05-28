@@ -27,11 +27,16 @@ module.exports = (env, options) => {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.(j|t)sx?$/,
           exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader'
-          }
+          use: [
+            {
+              loader: 'babel-loader',
+            },
+            {
+              loader: "ts-loader"
+            }
+          ]
         },
         {
           test: /\.[s]?css$/,
@@ -39,9 +44,21 @@ module.exports = (env, options) => {
             MiniCssExtractPlugin.loader,
             'css-loader',
             'sass-loader',
+            'postcss-loader'
           ],
+        },
+        {
+          test: /\.(jpg|png|gif)$/,
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]"
+            // outputPath: "./static/images"
+          }
         }
       ]
+    },
+    resolve: {
+      extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".scss"]
     },
     plugins: [
       new MiniCssExtractPlugin({ filename: '../css/app.css' }),
