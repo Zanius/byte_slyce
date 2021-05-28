@@ -5,7 +5,8 @@ config :byte_slyce, ByteSlyce.Repo,
   username: "postgres",
   password: "postgres",
   database: "byte_slyce_dev",
-  hostname: "localhost",
+  port: 5432,
+  hostname: "db",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
