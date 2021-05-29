@@ -37,6 +37,12 @@ defmodule ByteSlyce.LongUrls do
   """
   def get_long_url!(id), do: Repo.get!(LongUrl, id)
 
+  def get_long_url_by_slug!(slug) do
+    slug
+    |> decode_slug
+    |> get_long_url!
+  end
+
   @doc """
   Creates a long_url.
 
@@ -100,5 +106,13 @@ defmodule ByteSlyce.LongUrls do
   """
   def change_long_url(%LongUrl{} = long_url, attrs \\ %{}) do
     LongUrl.changeset(long_url, attrs)
+  end
+
+  def encode_url_id(id) do
+    Base62.encode(id)
+  end
+
+  defp decode_slug(slug) do
+    Base62.decode!(slug)
   end
 end

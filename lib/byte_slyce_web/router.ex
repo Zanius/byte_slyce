@@ -17,6 +17,7 @@ defmodule ByteSlyceWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/:url_slug", SlugController, :slug_redirect
   end
 
   # Other scopes may use custom stacks.
