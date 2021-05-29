@@ -20,9 +20,11 @@ defmodule ByteSlyceWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", ByteSlyceWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", ByteSlyceWeb do
+    pipe_through :api
+
+    resources "/long_urls", LongUrlController, except: [:new, :edit]
+  end
 
   # Enables LiveDashboard only for development
   #
