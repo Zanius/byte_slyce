@@ -1,19 +1,28 @@
 import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SuccessMessage from "./SuccessMessage"
 import ErrorMessage from "./ErrorMessage"
 import Clipboard from "./Clipboard"
-import { ServerResponse, LongUrl } from "../types"
+import { LongUrl } from "../types"
 
 const UrlForm = () => {
-  const rootUrl = window.location.host + "/";
   const [url, setUrl] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [urlSlug, setUrlSlug] = useState("");
+  const [shortUrl, setShortUrl] = useState("");
+  const [rootUrl, setRootUrl] = useState("");
+  
+  useEffect(() => {
+    const rootUrlElement = document.querySelector("#root-url") as HTMLDivElement;
+    const rootUrlData = rootUrlElement.dataset.rootUrl
 
+    if (rootUrlData) {
+      setRootUrl(rootUrlData);
+    }
+  });
+ 
   const submitUrl = async () => {
-    setUrlSlug("");
+    setShortUrl("");
     setSuccessMessage("");
     if (errorMessage.length > 0 || !url || url === "") {
       return null;
@@ -32,12 +41,11 @@ const UrlForm = () => {
 
     const response = await axios(config)
       .then(function (response: AxiosResponse) {
-        console.log(response)
         const urlResponse : LongUrl = response.data.data;
-        console.log(urlResponse)
-        setUrlSlug(urlResponse.url_slug)
-        setSuccessMessage(`Your new url is: ${urlResponse}`);
-        console.log(response);
+        const shortenedUrl = `${rootUrl}/${urlResponse.url_slug}`
+        console.log(shortenedUrl)
+        setShortUrl(shortenedUrl)
+        setSuccessMessage(`Your new url is: ${shortenedUrl}`);
       })
       .catch(function (error) {
         console.log(error);
@@ -77,7 +85,7 @@ const UrlForm = () => {
       </div>
 
       <div className="flex flex-col space-y-1">
-        {successMessage ? <SuccessMessage message={successMessage}><Clipboard url={urlSlug}/></SuccessMessage> : null}
+        {successMessage ? <SuccessMessage message={successMessage}><Clipboard url={shortUrl}/></SuccessMessage> : null}
         {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
       </div>
 

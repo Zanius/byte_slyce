@@ -12,6 +12,7 @@
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= tag(:div, [data: [root_url: System.fetch_env!("ROOT_URL")], id: "root-url"])%>
       <%= @inner_content %>
     </main>
   </body>
