@@ -12,18 +12,9 @@ const UrlForm = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [shortUrl, setShortUrl] = useState("");
-  const [rootUrl, setRootUrl] = useState("");
-
-  useEffect(() => {
-    const rootUrlElement = document.querySelector("#root-url") as HTMLDivElement;
-    const rootUrlData = rootUrlElement.dataset.rootUrl
-
-    if (rootUrlData) {
-      setRootUrl(rootUrlData);
-    }
-  });
 
   const submitUrl = async () => {
+    const rootUrl = window.location.host + "/";
     setShortUrl("");
     setSuccessMessage("");
     if (errorMessage.length > 0 || !longUrl || longUrl === "") {
@@ -33,7 +24,7 @@ const UrlForm = () => {
     submit(longUrl)
       .then(function (response: AxiosResponse) {
         const urlResponse: LongUrl = response.data.data;
-        const shortenedUrl = `${rootUrl}/${urlResponse.url_slug}`
+        const shortenedUrl = rootUrl + urlResponse.url_slug;
         setShortUrl(shortenedUrl)
         setSuccessMessage(`Your new url is: ${shortenedUrl}`);
       })
