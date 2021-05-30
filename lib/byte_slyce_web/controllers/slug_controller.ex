@@ -14,7 +14,8 @@ defmodule ByteSlyceWeb.SlugController do
       |> put_status(:moved_permanently)
       |> redirect(external: long_url.url)
     rescue
-      Ecto.NoResultsError -> conn
+      e -> conn
+      |> put_status(:not_found)
       |> put_view(ByteSlyceWeb.ErrorView)
       |> render(:"404")
     end
