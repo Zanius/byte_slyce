@@ -3,6 +3,7 @@ import React, { useState, useEffect, FormEvent, ChangeEvent, KeyboardEvent } fro
 import SuccessMessage from "./SuccessMessage"
 import ErrorMessage from "./ErrorMessage"
 import Clipboard from "./Clipboard"
+import SubmitButton from "./SubmitButton";
 import { LongUrl } from "../types"
 import { validateUrl } from "../Validation";
 import { formatServerErrors, submit } from "../ApiSubmission";
@@ -47,7 +48,7 @@ const UrlForm = () => {
   }
 
   return (
-    <div className="bg-gray-900 opacity-75 mx-auto w-1/2 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+    <div className="bg-gray-900 opacity-75 mx-auto w-1/2 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 space-y-1">
       <div className="mb-4">
         <label className="block text-blue-300 py-2 font-bold mb-2">
           You're on your way to a fun filled short url experience!
@@ -66,16 +67,7 @@ const UrlForm = () => {
         {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
       </div>
 
-      <div className="flex items-center justify-between pt-4">
-        <button
-          className="disabled:opacity-50 bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-          type="button"
-          disabled={errorMessage.length > 0}
-          onClick={submitUrl}
-        >
-          Slyce!
-        </button>
-      </div>
+      <SubmitButton clickHandler={submitUrl} disabled={errorMessage.length > 0} />
     </div>
   )
 }

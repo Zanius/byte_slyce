@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Welcome to Phoenix!</title>
-    <link rel="stylesheet" href="/css/app.css">
-  </head>
-  <body>
-    <div class="w-screen h-screen p-52 bg-cover bg-fixed flex flex-col">
-      <div class="w-full flex items-center justify-between">
-        <a class="flex justify-center align-middle text-indigo-400 w-full no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="/">
-          That shortened url doesn't seem to exist! Click here to shorten a new url.
-        </a>
-      </div>
-    </div>
-  </body>
-</html>
+<div class="w-screen h-screen p-52 bg-cover bg-fixed flex flex-col">
+  <div class="w-full flex items-center justify-between">
+    <a class="flex justify-center align-middle text-indigo-400 w-full no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="/">
+      That shortened url doesn't seem to exist! Click here to shorten a new url.
+    </a>
+  </div>
+</div>
