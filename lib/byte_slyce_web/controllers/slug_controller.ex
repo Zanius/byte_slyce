@@ -2,7 +2,6 @@ defmodule ByteSlyceWeb.SlugController do
   use ByteSlyceWeb, :controller
 
   alias ByteSlyce.LongUrls
-  alias ByteSlyce.LongUrls.LongUrl
   alias Ecto
 
   action_fallback ByteSlyceWeb.FallbackController
@@ -14,7 +13,7 @@ defmodule ByteSlyceWeb.SlugController do
       |> put_status(:moved_permanently)
       |> redirect(external: long_url.url)
     rescue
-      e -> conn
+      _e -> conn
       |> put_status(:not_found)
       |> put_view(ByteSlyceWeb.ErrorView)
       |> render(:"404")
