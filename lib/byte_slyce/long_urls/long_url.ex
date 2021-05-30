@@ -13,5 +13,8 @@ defmodule ByteSlyce.LongUrls.LongUrl do
     long_url
     |> cast(attrs, [:url])
     |> validate_required([:url])
+    |> validate_format(:url, ~r/http(s)?:\/\//,
+      message: "Invalid url, must start with https:// or http://"
+    )
   end
 end

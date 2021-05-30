@@ -1,17 +1,19 @@
-import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from "axios";
-import React, { useState, useEffect } from "react";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import React, { useState, useEffect, FormEvent, ChangeEvent, KeyboardEvent } from "react";
 import SuccessMessage from "./SuccessMessage"
 import ErrorMessage from "./ErrorMessage"
 import Clipboard from "./Clipboard"
 import { LongUrl } from "../types"
+import { validateUrl } from "../Validation";
+import { formatServerErrors, submit } from "../ApiSubmission";
 
 const UrlForm = () => {
-  const [url, setUrl] = useState("");
+  const [longUrl, setLongUrl] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [rootUrl, setRootUrl] = useState("");
-  
+
   useEffect(() => {
     const rootUrlElement = document.querySelector("#root-url") as HTMLDivElement;
     const rootUrlData = rootUrlElement.dataset.rootUrl
@@ -20,58 +22,41 @@ const UrlForm = () => {
       setRootUrl(rootUrlData);
     }
   });
- 
+
   const submitUrl = async () => {
     setShortUrl("");
     setSuccessMessage("");
-    if (errorMessage.length > 0 || !url || url === "") {
+    if (errorMessage.length > 0 || !longUrl || longUrl === "") {
       return null;
     }
 
-    const data = JSON.stringify({ "long_url": { url } });
-
-    const config: AxiosRequestConfig = {
-      method: 'post',
-      url: '/api/long_urls',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: data
-    };
-
-    const response = await axios(config)
+    submit(longUrl)
       .then(function (response: AxiosResponse) {
-        const urlResponse : LongUrl = response.data.data;
+        const urlResponse: LongUrl = response.data.data;
         const shortenedUrl = `${rootUrl}/${urlResponse.url_slug}`
-        console.log(shortenedUrl)
         setShortUrl(shortenedUrl)
         setSuccessMessage(`Your new url is: ${shortenedUrl}`);
       })
-      .catch(function (error) {
-        console.log(error);
-        setErrorMessage(error);
+      .catch(function (error: AxiosError) {
+        setErrorMessage(formatServerErrors(error));
       });
   }
 
-  const validUrl = new RegExp(
-    /^(h$|ht$|htt$|http$|https?$|https?:$|https?:\/$|https?:\/\/)/
-  );
+  const handleUrlInput = (urlString: string) => {
+    setErrorMessage(validateUrl(urlString))
+    setLongUrl(urlString);
+  }
 
-  const validate = (urlString: string) => {
-    if (!validUrl.test(urlString)) {
-      setErrorMessage("Url must begin with http:// or https://");
-    } else {
-      setErrorMessage("");
+  const handleKeyPress = (e: KeyboardEvent) => {
+    e.preventDefault
+    if (e.code === "Enter") {
+      setErrorMessage(validateUrl(longUrl))
+      submitUrl()
     }
   }
 
-  const handleUrlInput = (urlString: string) => {
-    validate(urlString);
-    setUrl(urlString);
-  }
-
   return (
-    <form onSubmit={submitUrl} className="bg-gray-900 opacity-75 mx-auto w-1/2 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+    <div className="bg-gray-900 opacity-75 mx-auto w-1/2 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
       <div className="mb-4">
         <label className="block text-blue-300 py-2 font-bold mb-2">
           You're on your way to a fun filled short url experience!
@@ -80,12 +65,13 @@ const UrlForm = () => {
             type="text"
             placeholder="https://www.yoursuperhugeurlthatiswaytoolong.com"
             onChange={e => handleUrlInput(e.target.value)}
+            onKeyPress={handleKeyPress}
           />
         </label>
       </div>
 
       <div className="flex flex-col space-y-1">
-        {successMessage ? <SuccessMessage message={successMessage}><Clipboard url={shortUrl}/></SuccessMessage> : null}
+        {successMessage ? <SuccessMessage message={successMessage}><Clipboard url={shortUrl} /></SuccessMessage> : null}
         {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
       </div>
 
@@ -99,15 +85,8 @@ const UrlForm = () => {
           Slyce!
         </button>
       </div>
-    </form>
+    </div>
   )
 }
 
 export default UrlForm
-
-
-
-
-
-
-

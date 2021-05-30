@@ -3,7 +3,3 @@ export interface LongUrl {
   url: string;
   url_slug: string;
 }
-
-export interface ServerResponse {
-  data: LongUrl
-}

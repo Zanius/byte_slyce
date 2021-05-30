@@ -24,7 +24,7 @@ defmodule ByteSlyceWeb.Router do
   scope "/api", ByteSlyceWeb do
     pipe_through :api
 
-    resources "/long_urls", LongUrlController, except: [:new, :edit]
+    resources "/long_urls", LongUrlController, only: [:create]
   end
 
   # Enables LiveDashboard only for development
