@@ -37,6 +37,20 @@ defmodule ByteSlyce.LongUrls do
   """
   def get_long_url!(id), do: Repo.get!(LongUrl, id)
 
+  @doc """
+  Finds a single long url by decoding it's slug.
+
+  Raises `Ecto.NoResultsError` if the Long url does not exist.
+
+  ## Examples
+
+      iex> get_long_url_by_slug!(k1)
+      %LongUrl{}
+
+      iex> get_long_url_by_slug!(a5)
+      ** (Ecto.NoResultsError)
+
+  """
   def get_long_url_by_slug!(slug) do
     slug
     |> decode_slug
@@ -59,53 +73,6 @@ defmodule ByteSlyce.LongUrls do
     %LongUrl{}
     |> LongUrl.changeset(attrs)
     |> Repo.insert()
-  end
-
-  @doc """
-  Updates a long_url.
-
-  ## Examples
-
-      iex> update_long_url(long_url, %{field: new_value})
-      {:ok, %LongUrl{}}
-
-      iex> update_long_url(long_url, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_long_url(%LongUrl{} = long_url, attrs) do
-    long_url
-    |> LongUrl.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a long_url.
-
-  ## Examples
-
-      iex> delete_long_url(long_url)
-      {:ok, %LongUrl{}}
-
-      iex> delete_long_url(long_url)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_long_url(%LongUrl{} = long_url) do
-    Repo.delete(long_url)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking long_url changes.
-
-  ## Examples
-
-      iex> change_long_url(long_url)
-      %Ecto.Changeset{data: %LongUrl{}}
-
-  """
-  def change_long_url(%LongUrl{} = long_url, attrs \\ %{}) do
-    LongUrl.changeset(long_url, attrs)
   end
 
   def encode_url_id(id) do

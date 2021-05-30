@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  phoenix_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: byte_slyce_test
+      PGPORT: 5433
+      PGHOST: test_db
+      ROOT_URL: localhost:8080
+      MIX_ENV: test
+    ports:
+      - "8080:4000"
+    depends_on:
+      - test_db
+  test_db:
+    image: postgres:10
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    ports:
+      - "5433:5432"

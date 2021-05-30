@@ -6,9 +6,8 @@ defmodule ByteSlyce.LongUrlsTest do
   describe "long_urls" do
     alias ByteSlyce.LongUrls.LongUrl
 
-    @valid_attrs %{url: "some url"}
-    @update_attrs %{url: "some updated url"}
-    @invalid_attrs %{url: nil}
+    @valid_attrs %{url: "https://www.someurl.com"}
+    @invalid_attrs %{url: "www.someurl.com"}
 
     def long_url_fixture(attrs \\ %{}) do
       {:ok, long_url} =
@@ -29,36 +28,19 @@ defmodule ByteSlyce.LongUrlsTest do
       assert LongUrls.get_long_url!(long_url.id) == long_url
     end
 
+    test "get_long_url_by_slug!/1 returns the long_url with correct id from decoded slug" do
+      long_url = long_url_fixture()
+      slug = LongUrls.encode_url_id(long_url.id)
+      assert LongUrls.get_long_url_by_slug!(slug) == long_url
+    end
+
     test "create_long_url/1 with valid data creates a long_url" do
       assert {:ok, %LongUrl{} = long_url} = LongUrls.create_long_url(@valid_attrs)
-      assert long_url.url == "some url"
+      assert long_url.url == "https://www.someurl.com"
     end
 
     test "create_long_url/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = LongUrls.create_long_url(@invalid_attrs)
-    end
-
-    test "update_long_url/2 with valid data updates the long_url" do
-      long_url = long_url_fixture()
-      assert {:ok, %LongUrl{} = long_url} = LongUrls.update_long_url(long_url, @update_attrs)
-      assert long_url.url == "some updated url"
-    end
-
-    test "update_long_url/2 with invalid data returns error changeset" do
-      long_url = long_url_fixture()
-      assert {:error, %Ecto.Changeset{}} = LongUrls.update_long_url(long_url, @invalid_attrs)
-      assert long_url == LongUrls.get_long_url!(long_url.id)
-    end
-
-    test "delete_long_url/1 deletes the long_url" do
-      long_url = long_url_fixture()
-      assert {:ok, %LongUrl{}} = LongUrls.delete_long_url(long_url)
-      assert_raise Ecto.NoResultsError, fn -> LongUrls.get_long_url!(long_url.id) end
-    end
-
-    test "change_long_url/1 returns a long_url changeset" do
-      long_url = long_url_fixture()
-      assert %Ecto.Changeset{} = LongUrls.change_long_url(long_url)
     end
   end
 end
