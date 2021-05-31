@@ -17,7 +17,7 @@ const Clipboard = ({ url }: ClipboardProps) => {
   
   return (
     <svg onClick={onClipClick} 
-      className="cusor-pointer h-6 w-6 text-green-500 inline"  
+      className="cusor-pointer h-6 w-6 text-green-500 inline align-bottom"  
       width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" 
       fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" 
       d="M0 0h24v24H0z"/>  
