@@ -53,7 +53,7 @@ const UrlForm = () => {
 
   return (
     <div className="bg-gray-900 opacity-75 mx-auto shadow-lg rounded-lg p-4 space-y-2">
-      <label className="block text-blue-300 py-2 font-bold mb-2">
+      <label className="block text-blue-300 py-2 font-bold">
         You're on your way to a fun filled short url experience!
         <input
           className="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
