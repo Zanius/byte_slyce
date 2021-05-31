@@ -1,0 +1,16 @@
+To run the app:
+
+1. Clone the git repo
+2. cd into the cloned directory
+3. run `docker-compose up`
+4. navigate to `localhost:8080`
+
+This command will start two containers, a phoenix server and a postgres database.
+
+To run the test suite:
+
+1. cd into the directory
+2. `docker-compose run -e MIX_ENV=test phoenix mix test`
+
+This will run phoenix in the test environment and run several ExUnit tests and Wallaby tests running
+on headless chrome.
