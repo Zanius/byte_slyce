@@ -29,21 +29,21 @@ defmodule ByteSlyceWeb.SlugControllerTest do
       assert html_response(conn, 404)
     end
 
-    test "handles 5 requests in less than a second", %{conn: conn} do
-      long_url = long_url_fixture()
-      slug = LongUrls.encode_url_id(long_url.id)
+    # test "handles 5 requests in less than a second", %{conn: conn} do
+    #   long_url = long_url_fixture()
+    #   slug = LongUrls.encode_url_id(long_url.id)
 
-      output = Benchee.run(%{
-        "performance" => fn ->
-          for n <- 0..4 do
-            get(conn, Routes.slug_path(conn, :slug_redirect, slug))
-          end
-        end
-      })
+    #   output = Benchee.run(%{
+    #     "performance" => fn ->
+    #       for n <- 0..4 do
+    #         get(conn, Routes.slug_path(conn, :slug_redirect, slug))
+    #       end
+    #     end
+    #   })
 
-      scenario = Enum.at(output.scenario, 0)
+    #   scenario = Enum.at(output.scenario, 0)
 
-      assert scenario.run_time_data.statistics.average <= 100_000_000
-    end
+    #   assert scenario.run_time_data.statistics.average <= 100_000_000
+    # end
   end
 end

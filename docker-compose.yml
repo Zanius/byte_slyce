@@ -4,6 +4,8 @@ services:
   phoenix:
     build:
       context: .
+      dockerfile: 
+        Dockerfile
     environment:
       PGUSER: postgres
       PGPASSWORD: postgres
@@ -16,8 +18,26 @@ services:
       - "8080:4000"
     depends_on:
       - db
-    # volumes:
-    #   - "./:/app"
+    volumes:
+      - "./:/app"
+  # phoenix_test:
+  #   build:
+  #     context: .
+  #   environment:
+  #     PGUSER: postgres
+  #     PGPASSWORD: postgres
+  #     PGDATABASE: byte_slyce_dev
+  #     PGPORT: 5432
+  #     PGHOST: db
+  #     ROOT_URL: localhost:8080
+  #     PHOENIX_PORT: 8080
+  #     MIX_ENV: test
+  #   ports:
+  #     - "8080:4000"
+  #   depends_on:
+  #     - db
+  #   volumes:
+  #     - "./:/app"
   db:
     image: postgres:10
     environment:

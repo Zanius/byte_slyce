@@ -9,6 +9,7 @@ defmodule ByteSlyceWeb.UrlFormTest do
   feature "error dialog appears when invalid input is entered", %{session: session} do
     session
     |> visit("/")
+    |> take_screenshot()
     |> assert_has(@button)
     |> fill_in(@input, with: "aaaa")
     |> assert_has(@error)

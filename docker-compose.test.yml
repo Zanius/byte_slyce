@@ -1,0 +1,33 @@
+# version: "3"
+
+# services:
+#   phoenix_test:
+#     build:
+#       context: .
+#       dockerfile: "Dockerfile.test"
+#     environment:
+#       PGUSER: postgres
+#       PGPASSWORD: postgres
+#       PGDATABASE: byte_slyce_dev
+#       PGPORT: 5432
+#       PGHOST: db
+#       ROOT_URL: localhost:8080
+#       PHOENIX_PORT: 8080
+#       MIX_ENV: test
+#     ports:
+#       - "8080:4000"
+#     depends_on:
+#       - db
+#     volumes:
+#       - "./:/app"
+#   db:
+#     image: postgres:10
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#       PGDATA: /var/lib/postgresql/data/pgdata
+#     restart: always
+#     volumes:
+#       - pgdata:/var/lib/postgresql/data
+# volumes:
+#   pgdata:

@@ -1,7 +1,0 @@
-version: '3'
-
-services:
-  phoenix:
-    command: mix phx.deps.get
-    volumes:
-      - "./:/app"

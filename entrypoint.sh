@@ -1,5 +1,9 @@
 #!/bin/bash
 
+mix deps.get
+mix do compile
+npm install --prefix assets
+
 # Wait until Postgres is ready
 while ! pg_isready -q -h $PGHOST -p $PGPORT -U $PGUSER
 do
