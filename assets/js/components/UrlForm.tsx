@@ -48,24 +48,21 @@ const UrlForm = () => {
   }
 
   return (
-    <div className="bg-gray-900 opacity-75 mx-auto w-1/2 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 space-y-1">
-      <div className="mb-4">
-        <label className="block text-blue-300 py-2 font-bold mb-2">
-          You're on your way to a fun filled short url experience!
-          <input
-            className="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-            type="text"
-            placeholder="https://www.yoursuperhugeurlthatiswaytoolong.com"
-            onChange={e => handleUrlInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-          />
-        </label>
-      </div>
+    <div className="bg-gray-900 opacity-75 mx-auto w-1/2 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 space-y-2">
+      <label className="block text-blue-300 py-2 font-bold mb-2">
+        You're on your way to a fun filled short url experience!
+        <input
+          className="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+          type="text"
+          placeholder="https://www.yoursuperhugeurlthatiswaytoolong.com"
+          onChange={e => handleUrlInput(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+      </label>
 
-      <div className="flex flex-col space-y-1">
-        {successMessage ? <SuccessMessage message={successMessage}><Clipboard url={shortUrl} /></SuccessMessage> : null}
-        {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
-      </div>
+
+      {successMessage ? <SuccessMessage message={successMessage}><Clipboard url={shortUrl} /></SuccessMessage> : null}
+      {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
 
       <SubmitButton clickHandler={submitUrl} disabled={errorMessage.length > 0} />
     </div>
