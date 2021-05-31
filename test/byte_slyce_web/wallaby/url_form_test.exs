@@ -13,7 +13,6 @@ defmodule ByteSlyceWeb.UrlFormTest do
     |> assert_has(@button)
     |> fill_in(@input, with: "aaaa")
     |> assert_has(@error)
-    |> take_screenshot()
   end
 
   feature "error message does not appear when first few characters match http(s)://", %{session: session} do
@@ -21,7 +20,6 @@ defmodule ByteSlyceWeb.UrlFormTest do
     |> visit("/")
     |> fill_in(@input, with: "htt")
     |> refute_has(@error)
-    |> take_screenshot()
   end
 
   feature "error message appears when server throws an error", %{session: session} do
@@ -31,6 +29,5 @@ defmodule ByteSlyceWeb.UrlFormTest do
     |> fill_in(@input, with: "htt")
     |> click(@button)
     |> assert_has(@error)
-    |> take_screenshot()
   end
 end

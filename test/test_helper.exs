@@ -1,4 +1,5 @@
 ExUnit.start()
 Ecto.Adapters.SQL.Sandbox.mode(ByteSlyce.Repo, :manual)
 Application.put_env(:wallaby, :base_url, ByteSlyceWeb.Endpoint.url)
+Application.put_env(:wallaby, :screenshot_on_failure, true)
 {:ok, _} = Application.ensure_all_started(:wallaby)

@@ -33,22 +33,12 @@ defmodule ByteSlyceWeb.SlugControllerTest do
       long_url = long_url_fixture()
       slug = LongUrls.encode_url_id(long_url.id)
 
-      # output = Benchee.run(%{
-      #   "performance" => fn ->
-      #     for n <- 0..4 do
-      #       get(conn, Routes.slug_path(conn, :slug_redirect, slug))
-      #     end
-      #   end
-      # })
-
       time = :timer.tc(fn ->
-        for n <- 0..4 do
+        for _n <- 0..4 do
           get(conn, Routes.slug_path(conn, :slug_redirect, slug))
         end
       end) |> elem(0)
 
-      # scenario = Enum.at(output.scenarios, 0)
-      # assert scenario.run_time_data.statistics.average <= 1_000_000_000
       assert time < 1_000_000
     end
   end
