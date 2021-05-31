@@ -46,7 +46,8 @@ defmodule ByteSlyce.MixProject do
       {:jason, "~> 1.0"},
       {:base62, "~> 1.2"},
       {:plug_cowboy, "~> 2.0"},
-      {:wallaby, "~> 0.28.0", runtime: false, only: :test}
+      {:wallaby, "~> 0.28.0", runtime: false, only: :test},
+      {:benchee, "~> 1.0", only: :test}
     ]
   end
 
