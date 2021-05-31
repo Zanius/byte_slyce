@@ -15,7 +15,6 @@ const classNames = (disabled: boolean) : string => {
     hover:from-pink-500 hover:to-green-500 
     font-bold py-2 px-4 
     rounded focus:ring text-white
-    
     ${disabledClasses(disabled)}
   `
 }
@@ -28,19 +27,11 @@ const disabledClasses = (disabled: boolean) : string => {
   }
 }
 
-const buttonStyle = (disabled: boolean) => {
-  if (disabled) {
-    return {
-      backgroundColor: "grey"
-    }
-  }
-}
 // disabled:opacity-50 
 const SubmitButton = ({ clickHandler, disabled }: ButtonProps) => {
   return (
     <button
       className={classNames(disabled)}
-      style={buttonStyle(disabled)}
       type="button"
       disabled={disabled}
       onClick={clickHandler}

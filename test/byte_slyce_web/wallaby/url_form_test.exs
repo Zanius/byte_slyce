@@ -4,15 +4,14 @@ defmodule ByteSlyceWeb.UrlFormTest do
 
   @button Query.css(".submit-button")
   @error Query.css(".error")
+  @input Query.css("input")
 
   feature "exists", %{session: session} do
     session
     |> visit("/")
-    |> take_screenshot()
     |> assert_has(@button)
-    |> click(@button)
+    |> fill_in(@input, with: "aaaa")
     |> assert_has(@error)
-    # |> List.first()
-    # |> assert_has(Query.css(".user-name", text: "Chris"))
+    |> take_screenshot()
   end
 end
