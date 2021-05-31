@@ -47,6 +47,10 @@ const UrlForm = () => {
     }
   }
 
+  const buttonDisabled = () : boolean => {
+    return errorMessage.length > 0 || longUrl.length < 1
+  }
+
   return (
     <div className="bg-gray-900 opacity-75 mx-auto w-1/2 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 space-y-2">
       <label className="block text-blue-300 py-2 font-bold mb-2">
@@ -60,11 +64,10 @@ const UrlForm = () => {
         />
       </label>
 
-
       {successMessage ? <SuccessMessage message={successMessage}><Clipboard url={shortUrl} /></SuccessMessage> : null}
       {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
 
-      <SubmitButton clickHandler={submitUrl} disabled={errorMessage.length > 0} />
+      <SubmitButton clickHandler={submitUrl} disabled={buttonDisabled()} />
     </div>
   )
 }

@@ -8,19 +8,30 @@ interface ButtonProps {
   disabled: boolean
 }
 
-const buttonClassNames = `
-  submit-button
-  bg-gradient-to-r from-purple-800 to-green-500 
-  hover:from-pink-500 hover:to-green-500 
-  text-white font-bold py-2 px-4 
-  rounded focus:ring 
-  transform transition hover:scale-105 duration-300 ease-in-out
-`
+const classNames = (disabled: boolean) : string => {
+  return `
+    submit-button
+    bg-gradient-to-r from-purple-800 to-green-500 
+    hover:from-pink-500 hover:to-green-500 
+    font-bold py-2 px-4 
+    rounded focus:ring text-white
+    
+    ${disabledClasses(disabled)}
+  `
+}
+
+const disabledClasses = (disabled: boolean) : string => {
+  if (disabled) {
+    return "cursor-not-allowed opacity-80"
+  } else {
+    return "transform transition hover:scale-105 duration-300 ease-in-out"
+  }
+}
 
 const buttonStyle = (disabled: boolean) => {
   if (disabled) {
     return {
-      opacity: 50
+      backgroundColor: "grey"
     }
   }
 }
@@ -28,7 +39,7 @@ const buttonStyle = (disabled: boolean) => {
 const SubmitButton = ({ clickHandler, disabled }: ButtonProps) => {
   return (
     <button
-      className={`${buttonClassNames}`}
+      className={classNames(disabled)}
       style={buttonStyle(disabled)}
       type="button"
       disabled={disabled}
