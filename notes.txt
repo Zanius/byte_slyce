@@ -1,5 +1,5 @@
-Requirements: Docker, Docker Compose
-
+Requirements: 
+Docker, Docker Compose
 
 To run the app:
 
@@ -15,12 +15,11 @@ To run the test suite:
 1. cd into the directory
 2. run "docker-compose run -e MIX_ENV=test phoenix mix test"
 
-This will run phoenix in the test environment and run several ExUnit tests and Wallaby tests running
+This will run phoenix in the test environment and run several ExUnit and Wallaby tests running
 on headless chrome.
 
 Approach/Assumptions:
-I am not an elixir/phoenix developer and I have only been learning elixir for a short time.
-In my current job my primary stack is a ruby on rails with a VueJS frontend. 
+In my current job my primary stack is ruby on rails with a VueJS frontend. 
 I may not have followed certain elixir/phoenix conventions that I am unaware of.
 
 The app is not a true SPA since there is no frontend router. Since most of the traffic would

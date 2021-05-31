@@ -16,8 +16,8 @@ services:
       - "8080:4000"
     depends_on:
       - db
-    volumes:
-      - "./:/app"
+    # volumes:
+      # - "./:/app"
   db:
     image: postgres:10
     environment:
