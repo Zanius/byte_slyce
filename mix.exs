@@ -61,7 +61,14 @@ defmodule ByteSlyce.MixProject do
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "assets.compile": &compile_assets/1
     ]
+  end
+
+  defp compile_assets(_) do
+    Mix.shell().cmd("cd assets && ./node_modules/.bin/webpack --mode development",
+      quiet: true
+    )
   end
 end

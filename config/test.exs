@@ -16,8 +16,10 @@ config :byte_slyce, ByteSlyce.Repo,
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :byte_slyce, ByteSlyceWeb.Endpoint,
-  http: [port: 4002],
-  server: false
+  http: [port: 8080],
+  server: true
+
+# config :byte_slyce, :sandbox, Ecto.Adapters.SQL.Sandbox
 
 # Print only warnings and errors during test
 config :logger, level: :warn
