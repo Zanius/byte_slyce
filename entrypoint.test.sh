@@ -2,7 +2,7 @@
 
 mix deps.get
 mix do compile
-npm install --prefix assets
+yarn install --prefix assets
 cd assets && ./node_modules/.bin/webpack --mode development
 cd ..
 

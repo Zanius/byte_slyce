@@ -1,9 +1,9 @@
 FROM elixir:1.12.0-alpine
 
 RUN apk update && apk upgrade && \
-  apk add postgresql-client && \
-  apk add bash chromium chromium-chromedriver inotify-tools && \
-  apk add nodejs npm && \
+  apk add bash postgresql-client \
+  chromium chromium-chromedriver inotify-tools \
+  nodejs yarn && \
   rm -rf /var/cache/apk/*
 
 RUN mkdir /app

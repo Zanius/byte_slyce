@@ -2,7 +2,7 @@
 
 mix deps.get
 mix do compile
-npm install --prefix assets
+yarn install --prefix assets
 cd assets && ./node_modules/.bin/webpack --mode development
 cd ..
 
@@ -20,8 +20,5 @@ if [[ -z `psql -Atqc "\\list $PGDATABASE"` ]]; then
   mix run priv/repo/seeds.exs
   echo "Database $PGDATABASE created."
 fi
-
-
-# npm rebuild node-sass
 
 exec mix phx.server
