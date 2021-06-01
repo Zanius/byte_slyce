@@ -13,9 +13,6 @@ WORKDIR /app
 RUN mix local.hex --force
 RUN mix local.rebar --force
 
-WORKDIR /app/assets
-RUN npm install
-
 WORKDIR /app
 RUN chmod +x entrypoint.sh
 CMD ["/app/entrypoint.sh"]

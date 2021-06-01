@@ -4,8 +4,7 @@
   "license": "MIT",
   "scripts": {
     "deploy": "webpack --mode production",
-    "watch": "webpack --mode development --watch",
-    "docker:start": "npm rebuild node-sass && npm start"
+    "watch": "webpack --mode development --watch"
   },
   "dependencies": {
     "axios": "^0.21.1",
