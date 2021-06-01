@@ -3,6 +3,8 @@
 mix deps.get
 mix do compile
 npm install --prefix assets
+cd assets && ./node_modules/.bin/webpack --mode development
+cd ..
 
 while ! pg_isready -q -h $PGHOST -p $PGPORT -U $PGUSER
 do

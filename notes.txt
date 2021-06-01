@@ -14,8 +14,7 @@ This command will start two containers, a phoenix server and a postgres database
 To run the test suite:
 
 1. cd into the directory
-2. run "docker-compose up" or have an existing volume from a previous run
-3. run "docker-compose run -e MIX_ENV=test phoenix mix test"
+2. run "docker-compose run --rm --entrypoint="/app/entrypoint.test.sh" phoenix"
 
 This will run phoenix in the test environment and run several ExUnit and Wallaby tests running
 on headless chrome.
