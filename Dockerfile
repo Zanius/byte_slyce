@@ -1,23 +1,21 @@
-FROM elixir:latest
+FROM elixir:1.12.0-alpine
 
-RUN curl -fsSL https://deb.nodesource.com/setup_14.x  | bash -
-
-RUN apt-get update && apt-get install \
- -y postgresql-client nodejs inotify-tools chromium-driver
-
-RUN node -v
+RUN apk update && apk upgrade && \
+  apk add postgresql-client && \
+  apk add bash chromium chromium-chromedriver inotify-tools && \
+  apk add nodejs npm && \
+  rm -rf /var/cache/apk/*
 
 RUN mkdir /app
 COPY . /app
-WORKDIR /app
 
+WORKDIR /app
 RUN mix local.hex --force
 RUN mix local.rebar --force
 
 WORKDIR /app/assets
-# RUN npm install
-# RUN npm rebuild node-sass
+RUN npm install
 
 WORKDIR /app
-
+RUN chmod +x entrypoint.sh
 CMD ["/app/entrypoint.sh"]

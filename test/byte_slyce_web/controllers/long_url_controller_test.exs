@@ -12,7 +12,7 @@ defmodule ByteSlyceWeb.LongUrlControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
-  describe "create long_url" do
+  describe "create/2" do
     test "renders long_url when data is valid", %{conn: conn} do
       conn = post(conn, Routes.long_url_path(conn, :create), long_url: @create_attrs)
       assert %{"id" => _id, "url" => "https://www.someurl.com"} = json_response(conn, 201)["data"]

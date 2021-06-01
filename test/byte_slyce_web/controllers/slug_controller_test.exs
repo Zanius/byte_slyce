@@ -14,7 +14,7 @@ defmodule ByteSlyceWeb.SlugControllerTest do
     long_url
   end
 
-  describe "redirect with slug" do
+  describe "slug_redirect/2" do
     test "returns a 301 redirect when a long url is found", %{conn: conn} do
       long_url = long_url_fixture()
       slug = LongUrls.encode_url_id(long_url.id)

@@ -1,10 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
-mix deps.get
-mix do compile
-npm install --prefix assets
 
-# Wait until Postgres is ready
+# exec npm uninstall node-sass && npm install node-sass
+
 while ! pg_isready -q -h $PGHOST -p $PGPORT -U $PGUSER
 do
   echo "$(date) - waiting for database to start"
@@ -19,5 +17,10 @@ if [[ -z `psql -Atqc "\\list $PGDATABASE"` ]]; then
   mix run priv/repo/seeds.exs
   echo "Database $PGDATABASE created."
 fi
+
+mix deps.get
+mix do compile
+npm install --prefix assets
+# npm rebuild node-sass
 
 exec mix phx.server
