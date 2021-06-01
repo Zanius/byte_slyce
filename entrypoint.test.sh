@@ -2,8 +2,11 @@
 
 mix deps.get
 mix do compile
-yarn install --prefix assets
-cd assets && ./node_modules/.bin/webpack --mode development
+
+cd assets
+yarn install
+echo "Webpack is compiling..."
+./node_modules/.bin/webpack --mode development
 cd ..
 
 while ! pg_isready -q -h $PGHOST -p $PGPORT -U $PGUSER
