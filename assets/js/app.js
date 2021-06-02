@@ -19,9 +19,8 @@ import Root from "./components/Root";
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
   const errorPage = document.getElementById("error-page");
-  const rootUrl = document.querySelector('#root-url')?.dataset.rootUrl;
   if (root) {
-    ReactDOM.render(<Root  rootUrl={rootUrl} />, root);
+    ReactDOM.render(<Root />, root);
   } else if (errorPage) {
     ReactDOM.render(<Root error={true} />, errorPage);
   }
