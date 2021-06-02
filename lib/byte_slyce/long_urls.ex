@@ -5,7 +5,6 @@ defmodule ByteSlyce.LongUrls do
 
   import Ecto.Query, warn: false
   alias ByteSlyce.Repo
-
   alias ByteSlyce.LongUrls.LongUrl
 
   @doc """

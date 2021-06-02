@@ -7,6 +7,5 @@ defmodule ByteSlyce.Repo.Migrations.CreateLongUrls do
 
       timestamps()
     end
-
   end
 end

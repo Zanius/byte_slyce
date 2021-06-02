@@ -8,25 +8,29 @@ import { LongUrl } from "../types"
 import { validateUrl } from "../Validation";
 import { formatServerErrors, submit } from "../ApiSubmission";
 
-const UrlForm = () => {
+interface UrlFormProps {
+  rootUrl: string
+}
+
+const UrlForm = ({rootUrl}: UrlFormProps) => {
+  console.log(rootUrl)
   const [longUrl, setLongUrl] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [shortUrl, setShortUrl] = useState("");
 
   const submitUrl = async () => {
-    const rootUrl = window.location.host + "/";
     setShortUrl("");
     setLongUrl("");
     setSuccessMessage("");
-    if (errorMessage.length > 0 || !longUrl || longUrl === "") {
+    if (errorMessage.length > 0 || longUrl === "") {
       return null;
     }
 
     submit(longUrl)
       .then(function (response: AxiosResponse) {
         const urlResponse: LongUrl = response.data.data;
-        const shortenedUrl = rootUrl + urlResponse.url_slug;
+        const shortenedUrl = `${rootUrl}/${urlResponse.url_slug}`;
         setShortUrl(shortenedUrl)
         setSuccessMessage(`Your new url is: ${shortenedUrl}`);
       })
