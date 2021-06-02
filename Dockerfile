@@ -1,6 +1,6 @@
 FROM elixir:1.12.0-alpine
 
-RUN apk update && apk upgrade && \
+RUN apk update && \
   apk add bash postgresql-client \
   chromium chromium-chromedriver inotify-tools \
   nodejs yarn && \
@@ -14,5 +14,4 @@ RUN mix local.hex --force
 RUN mix local.rebar --force
 
 WORKDIR /app
-RUN chmod +x entrypoint.sh
 CMD ["/app/entrypoint.dev.sh"]
