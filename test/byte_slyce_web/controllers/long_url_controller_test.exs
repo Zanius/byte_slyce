@@ -1,8 +1,6 @@
 defmodule ByteSlyceWeb.LongUrlControllerTest do
   use ByteSlyceWeb.ConnCase
 
-  alias ByteSlyce.LongUrls
-
   @create_attrs %{
     url: "https://www.someurl.com"
   }

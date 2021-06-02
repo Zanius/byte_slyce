@@ -15,8 +15,7 @@ config :byte_slyce, ByteSlyceWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "K2HncG/TusGlVNYHQrD4Qv+Zu3wGlDbDilaP+Yq9XbpIZPrD7z+n32/Q20T16DwN",
   render_errors: [view: ByteSlyceWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: ByteSlyce.PubSub,
-  live_view: [signing_salt: "ao1dufry"]
+  pubsub_server: ByteSlyce.PubSub
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -24,6 +23,9 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :wallaby, driver: Wallaby.Chrome
+
+config :wallaby, otp_app: :byte_slyce
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

@@ -17,6 +17,7 @@ const UrlForm = () => {
   const submitUrl = async () => {
     const rootUrl = window.location.host + "/";
     setShortUrl("");
+    setLongUrl("");
     setSuccessMessage("");
     if (errorMessage.length > 0 || !longUrl || longUrl === "") {
       return null;
@@ -60,6 +61,7 @@ const UrlForm = () => {
           type="text"
           placeholder="https://www.yoursuperhugeurlthatiswaytoolong.com"
           onChange={e => handleUrlInput(e.target.value)}
+          value={longUrl}
           onKeyPress={handleKeyPress}
         />
       </label>

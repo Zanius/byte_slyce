@@ -1,7 +1,4 @@
 import React from "react";
-import UrlForm from "./UrlForm"
-import Header from "./Header"
-import background from "../../static/images/background.png";
 
 interface ButtonProps {
   clickHandler: () => void,

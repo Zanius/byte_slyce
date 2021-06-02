@@ -1,4 +1,5 @@
 #!/bin/sh
 
 sh ./entrypoint.sh
-exec mix test
+
+exec mix phx.server

@@ -15,4 +15,4 @@ RUN mix local.rebar --force
 
 WORKDIR /app
 RUN chmod +x entrypoint.sh
-CMD ["/app/entrypoint.sh"]
+CMD ["/app/entrypoint.dev.sh"]
