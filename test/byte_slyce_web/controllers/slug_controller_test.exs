@@ -6,7 +6,7 @@ defmodule ByteSlyceWeb.SlugControllerTest do
   @create_attrs %{
     url: "https://www.someurl.com"
   }
-  @invalid_slug "notarealslug"
+  @invalid_slug "zzzz"
   @redirect_response "<html><body>You are being <a href=\"https://www.someurl.com\">redirected</a>.</body></html>"
 
   def long_url_fixture() do
@@ -20,7 +20,6 @@ defmodule ByteSlyceWeb.SlugControllerTest do
       slug = LongUrls.encode_url_id(long_url.id)
 
       conn = get(conn, Routes.slug_path(conn, :slug_redirect, slug))
-
       assert html_response(conn, 301) == @redirect_response
     end
 
