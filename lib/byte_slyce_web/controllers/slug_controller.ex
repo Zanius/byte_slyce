@@ -12,8 +12,8 @@ defmodule ByteSlyceWeb.SlugController do
       conn
       |> put_status(:moved_permanently)
       |> redirect(external: long_url.url)
-    rescue
-      _e -> conn
+    rescue # rescue integer overflow
+      _e in DBConnection.EncodeError -> conn
       |> put_status(:not_found)
       |> put_view(ByteSlyceWeb.ErrorView)
       |> render(:"404")

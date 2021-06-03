@@ -24,7 +24,6 @@ const disabledClasses = (disabled: boolean) : string => {
   }
 }
 
-// disabled:opacity-50 
 const SubmitButton = ({ clickHandler, disabled }: ButtonProps) => {
   return (
     <button

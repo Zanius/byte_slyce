@@ -6,7 +6,7 @@ defmodule ByteSlyceWeb.SlugControllerTest do
   @create_attrs %{
     url: "https://www.someurl.com"
   }
-  @invalid_slug "zzzz"
+  @overflow_slug "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
   @redirect_response "<html><body>You are being <a href=\"https://www.someurl.com\">redirected</a>.</body></html>"
 
   def long_url_fixture() do
@@ -23,8 +23,8 @@ defmodule ByteSlyceWeb.SlugControllerTest do
       assert html_response(conn, 301) == @redirect_response
     end
 
-    test "renders errors when a long url can't be found", %{conn: conn} do
-      conn = get(conn, Routes.slug_path(conn, :slug_redirect, @invalid_slug))
+    test "returns a 404 when decoding a slug causes an integer overflow", %{conn: conn} do
+      conn = get(conn, Routes.slug_path(conn, :slug_redirect, @overflow_slug))
       assert html_response(conn, 404)
     end
 

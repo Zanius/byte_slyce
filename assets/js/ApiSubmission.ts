@@ -30,12 +30,3 @@ export async function submit(url: string): Promise<AxiosResponse> {
 
   return await axios(config);
 }
-
-
-// export const validateUrl = (url: string) : string => {
-//   if (!validUrl.test(url) || url === "") {
-//     return "Url must begin with http:// or https://"
-//   } else {
-//     return "";
-//   }
-// }
