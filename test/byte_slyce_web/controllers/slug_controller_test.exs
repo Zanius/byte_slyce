@@ -6,6 +6,7 @@ defmodule ByteSlyceWeb.SlugControllerTest do
   @create_attrs %{
     url: "https://www.someurl.com"
   }
+  @invalid_slug "zz"
   @overflow_slug "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
   @redirect_response "<html><body>You are being <a href=\"https://www.someurl.com\">redirected</a>.</body></html>"
 
@@ -21,6 +22,12 @@ defmodule ByteSlyceWeb.SlugControllerTest do
 
       conn = get(conn, Routes.slug_path(conn, :slug_redirect, slug))
       assert html_response(conn, 301) == @redirect_response
+    end
+
+    test "returns a 404 when decoding a slug that doesn't exist", %{conn: conn} do
+      assert_error_sent :not_found, fn ->
+        get(conn, Routes.slug_path(conn, :slug_redirect, @invalid_slug))
+      end
     end
 
     test "returns a 404 when decoding a slug causes an integer overflow", %{conn: conn} do
