@@ -12,7 +12,7 @@ config :byte_slyce,
 
 # Configures the endpoint
 config :byte_slyce, ByteSlyceWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: System.get_env("PHOENIX_HOST")],
   secret_key_base: "K2HncG/TusGlVNYHQrD4Qv+Zu3wGlDbDilaP+Yq9XbpIZPrD7z+n32/Q20T16DwN",
   render_errors: [view: ByteSlyceWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: ByteSlyce.PubSub

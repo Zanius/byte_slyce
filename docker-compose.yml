@@ -12,7 +12,7 @@ services:
       PGDATABASE: byte_slyce_dev
       PGPORT: 5432
       PGHOST: db
-      ROOT_URL: localhost:8080
+      PHOENIX_HOST: localhost
       PHOENIX_PORT: 8080
     ports:
       - "8080:4000"

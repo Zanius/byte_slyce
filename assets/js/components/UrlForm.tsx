@@ -17,7 +17,6 @@ const UrlForm = () => {
   const submitUrl = async () => {
     const rootUrl = window.location.host + "/";
     setShortUrl("");
-    setLongUrl("");
     setSuccessMessage("");
     if (errorMessage.length > 0 || longUrl === "") {
       return null;
@@ -28,6 +27,7 @@ const UrlForm = () => {
         const urlResponse: LongUrl = response.data.data;
         const shortenedUrl = rootUrl + urlResponse.url_slug;
         setShortUrl(shortenedUrl)
+        setLongUrl("");
         setSuccessMessage(`Your new url is: ${shortenedUrl}`);
       })
       .catch(function (error: AxiosError) {
